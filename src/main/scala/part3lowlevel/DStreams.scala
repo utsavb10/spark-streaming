@@ -23,7 +23,7 @@ object DStreams {
    */
   val ssc = new StreamingContext(spark.sparkContext, Seconds(1))
 
-  /*
+  /**
     - define input sources by creating DStreams
     - define transformations on DStreams
     - call an action on DStreams

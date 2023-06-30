@@ -17,6 +17,10 @@ object IntegratingJDBC {
 
   import spark.implicits._
 
+  /*
+  You can't read streams from JDBC
+  You can't write to JDBC in a STREAMING fashion, yet.
+   */
   def writeStreamToPostgres() = {
     val carsDF = spark.readStream
       .schema(carsSchema)

@@ -3,6 +3,14 @@ package part2structuredstreaming
 import org.apache.spark.sql.{Column, DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 
+/**
+  * Same aggregation API as non-streaming DFs
+  *
+  * To keep in mind,
+  *   aggregations work at a micro batch level
+  *   the append output mode not supported without watermarks*
+  *   some aggregations are not supported, eg sorting or chained aggregations
+  */
 object StreamingAggregations {
 
   val spark = SparkSession.builder()
@@ -68,6 +76,7 @@ object StreamingAggregations {
   }
 
   def main(args: Array[String]): Unit = {
+//    numericalAggregations(mean)
     groupNames()
   }
 }

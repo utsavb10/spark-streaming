@@ -38,7 +38,7 @@ object DStreamsWindowTransformations {
   // identical
   def sumAllTextByWindowAlt() = readLines().map(_.length).reduceByWindow(_ + _, Seconds(10), Seconds(5))
 
-  // tumbling windows
+  // tumbling windows -> no sliding of window, window is completely updated with every new slide
   def linesByTumblingWindow() = readLines().window(Seconds(10), Seconds(10))  // batch of batches
 
   def computeWordOccurrencesByWindow() = {

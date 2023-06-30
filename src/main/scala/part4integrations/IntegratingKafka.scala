@@ -4,6 +4,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 import common._
 
+/* to write something to a kafka topic, a key and value is required within the dataframe */
 object IntegratingKafka {
 
   val spark = SparkSession.builder()

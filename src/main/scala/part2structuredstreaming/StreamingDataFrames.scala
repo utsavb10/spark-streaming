@@ -10,7 +10,7 @@ object StreamingDataFrames {
 
   val spark = SparkSession.builder()
     .appName("Our first streams")
-    .master("local[2]")
+    .master("local[2]") // ~ .config("spark.master", "local[2]") [2] means 2 thread on local
     .getOrCreate()
 
   def readFromSocket() = {
@@ -37,6 +37,7 @@ object StreamingDataFrames {
     query.awaitTermination()
   }
 
+  // unlike static DataFrames, one has to supply schema into streaming dataframes for files
   def readFromFiles() = {
     val stocksDF: DataFrame = spark.readStream
       .format("csv")

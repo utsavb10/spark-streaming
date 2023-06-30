@@ -56,6 +56,8 @@ object IntegratingKafkaDStreams {
   }
 
   def writeToKafka() = {
+    // taking input from, netcat command
+    //nc -lk 12345
     val inputData = ssc.socketTextStream("localhost", 12345)
 
     // transform data
@@ -73,6 +75,7 @@ object IntegratingKafkaDStreams {
         // producer can insert records into the Kafka topics
         // available on this executor
         val producer = new KafkaProducer[String, String](kafkaHashMap)
+        // create a producer per partition as Producers are not serializable
 
         partition.foreach { value =>
           val message = new ProducerRecord[String, String](kafkaTopic, null, value)
@@ -80,6 +83,7 @@ object IntegratingKafkaDStreams {
           producer.send(message)
         }
 
+        // need to always close the producer
         producer.close()
       }
     }
